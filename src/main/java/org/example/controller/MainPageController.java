@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import javafx.application.Platform;
 import org.example.view.MainPage;
 
 import static org.example.view.Styles.*;
@@ -14,6 +15,8 @@ public class MainPageController {
         activeBtns();
 
         deactiveBtns();
+
+        exitBtn();
     }
 
     public MainPage getMainPage() {
@@ -55,6 +58,12 @@ public class MainPageController {
 
         mainPage.getExitBtn().setOnMouseExited(e -> {
             mainPage.getExitBtn().setStyle(normalStyle);
+        });
+    }
+
+    public void exitBtn(){
+        mainPage.getExitBtn().setOnAction(e-> {
+            Platform.exit();
         });
     }
 
