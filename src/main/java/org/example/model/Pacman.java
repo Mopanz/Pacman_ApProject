@@ -23,7 +23,7 @@ public class Pacman extends Character{
             case LEFT -> nextColumn--;
         }
 
-        if (!maze.isWall(nextRow, nextColumn)){ //بعدا شرط خارج نشدن از صفحه رو هم بهش اضافه کنم
+        if (!maze.isWall(nextRow, nextColumn)){
             setRow(nextRow);
             setColumn(nextColumn);
         }
