@@ -2,7 +2,7 @@ package org.example.model;
 
 public abstract class GameObject {
 
-    public static final int cellSize = 40;
+    public static final int cellSize = 20;
 
     private int row;
     private int column;
