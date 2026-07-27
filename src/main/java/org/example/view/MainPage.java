@@ -11,9 +11,8 @@ import javafx.scene.layout.VBox;
 
 import static org.example.view.Styles.*;
 
-public class MainPage extends StackPane {
+public class MainPage extends VBox {
 
-    private ImageView bg;
     private ImageView logo;
     private Button playBtn;
     private Button scoresBtn;
@@ -21,10 +20,6 @@ public class MainPage extends StackPane {
     private Button exitBtn;
 
     public MainPage(){
-        bg = new ImageView(new Image(getClass().getResourceAsStream("/Images/MainPageBackground.jpg")));
-        bg.fitWidthProperty().bind(this.widthProperty());
-        bg.fitHeightProperty().bind(this.heightProperty());
-        bg.setPreserveRatio(false);
 
         logo = new ImageView(new Image(getClass().getResourceAsStream("/Images/MainPageLogo.png")));
         logo.setFitWidth(500);
@@ -39,21 +34,13 @@ public class MainPage extends StackPane {
         exitBtn = new Button("Exit");
         exitBtn.setStyle(normalStyle);
 
-        VBox menu = new VBox(20);
-        menu.setAlignment(Pos.CENTER);
-        menu.setPadding(new Insets(40, 50, 50, 50));
-        menu.getChildren().addAll(logo, new Region(), playBtn, scoresBtn, settingsBtn,exitBtn);
-        menu.setMaxWidth(400);
+        this.setSpacing(20);
+        this.setAlignment(Pos.CENTER);
+        this.setStyle("-fx-background-color: black;");
+        this.setPadding(new Insets(40, 50, 50, 50));
+        this.getChildren().addAll(logo, new Region(), playBtn, scoresBtn, settingsBtn,exitBtn);
+        this.setMaxWidth(400);
 
-        this.getChildren().addAll(bg, menu);
-    }
-
-    public ImageView getBg() {
-        return bg;
-    }
-
-    public void setBg(ImageView bg) {
-        this.bg = bg;
     }
 
     public ImageView getLogo() {
