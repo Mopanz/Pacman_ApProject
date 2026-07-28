@@ -3,6 +3,7 @@ package org.example;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.controller.GameController;
 import org.example.controller.MainPageController;
 import org.example.view.MainPage;
 
@@ -13,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(new MainPageController().getMainPage()));
+        stage.setScene(new Scene(new GameController().getGameView()));
         stage.setWidth(560);
         stage.setHeight(720);
         stage.show();

@@ -9,7 +9,10 @@ public class Maze {
     private int columns;
 
     private ArrayList<Pellet> pellets;
+
     public Maze(int[][] grid){
+
+        pellets = new ArrayList<>();
         this.grid = grid;
         this.rows = grid.length;
         this.columns = grid[0].length;
