@@ -1,8 +1,11 @@
 package org.example.view;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.example.model.GameObject;
 import org.example.model.LevelsGrid;
 import org.example.model.Maze;
@@ -10,6 +13,7 @@ import org.example.model.Maze;
 public class GameView extends Pane {
 
     private Maze maze;
+    private Timeline pacmanAnimation;
 
     public GameView(){
 
@@ -43,6 +47,32 @@ public class GameView extends Pane {
             }
         }
 
+        Image pacmanImg1 = new Image(getClass().getResourceAsStream("/Images/Pacman1.png"));
+        Image pacmanImg2 = new Image(getClass().getResourceAsStream("/Images/Pacman2.png"));
+        Image pacmanImg3 = new Image(getClass().getResourceAsStream("/Images/Pacman3.png"));
+
+        ImageView pacmanImgView = new ImageView(pacmanImg1);
+        pacmanImgView.setX(14 * GameObject.cellSize);
+        pacmanImgView.setY(23 * GameObject.cellSize);
+
+        KeyFrame frame1 = new KeyFrame(Duration.millis(150), e -> pacmanImgView.setImage(pacmanImg1));
+        KeyFrame frame2 = new KeyFrame(Duration.millis(300), e -> pacmanImgView.setImage(pacmanImg2));
+        KeyFrame frame3 = new KeyFrame(Duration.millis(450), e -> pacmanImgView.setImage(pacmanImg3));
+        KeyFrame frame4 = new KeyFrame(Duration.millis(600), e -> pacmanImgView.setImage(pacmanImg2));
+        pacmanAnimation = new Timeline(frame1, frame2, frame3, frame4);
+        pacmanAnimation.setCycleCount(Timeline.INDEFINITE);
+
+        this.getChildren().add(pacmanImgView);
+
+        playPacmanAnimation();
+    }
+
+    public void playPacmanAnimation(){
+        pacmanAnimation.play();
+    }
+
+    public void pausePacmanAnimation(){
+        pacmanAnimation.pause();
     }
 
     public Maze getMaze() {
