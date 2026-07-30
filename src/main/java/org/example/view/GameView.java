@@ -46,7 +46,9 @@ public class GameView extends Pane {
                 }
             }
         }
+    }
 
+    public void creatPacman(){
         Image pacmanImg1 = new Image(getClass().getResourceAsStream("/Images/Pacman1.png"));
         Image pacmanImg2 = new Image(getClass().getResourceAsStream("/Images/Pacman2.png"));
         Image pacmanImg3 = new Image(getClass().getResourceAsStream("/Images/Pacman3.png"));
@@ -57,14 +59,12 @@ public class GameView extends Pane {
 
         KeyFrame frame1 = new KeyFrame(Duration.millis(150), e -> pacmanImgView.setImage(pacmanImg1));
         KeyFrame frame2 = new KeyFrame(Duration.millis(300), e -> pacmanImgView.setImage(pacmanImg2));
-        KeyFrame frame3 = new KeyFrame(Duration.millis(450), e -> pacmanImgView.setImage(pacmanImg3));
-        KeyFrame frame4 = new KeyFrame(Duration.millis(600), e -> pacmanImgView.setImage(pacmanImg2));
+        KeyFrame frame3 = new KeyFrame(Duration.millis(450), e -> pacmanImgView.setImage(pacmanImg1));
+        KeyFrame frame4 = new KeyFrame(Duration.millis(600), e -> pacmanImgView.setImage(pacmanImg3));
         pacmanAnimation = new Timeline(frame1, frame2, frame3, frame4);
         pacmanAnimation.setCycleCount(Timeline.INDEFINITE);
 
         this.getChildren().add(pacmanImgView);
-
-        playPacmanAnimation();
     }
 
     public void playPacmanAnimation(){
