@@ -3,20 +3,22 @@ package org.example.model;
 public class Pacman extends Character{
 
     private boolean alive;
+    private boolean moving;
 
     public Pacman(int row, int column){
         super(row, column, Direction.RIGHT);
         alive = true;
+        moving = false;
     }
 
 
     @Override
-    public void move(Maze maze) {
+    public boolean canMove(Maze maze, Direction direction) {
 
         int nextRow = getRow();
         int nextColumn = getColumn();
 
-        switch (getDirection()){
+        switch (direction){
             case UP -> nextRow--;
             case DOWN -> nextRow++;
             case RIGHT -> nextColumn++;
@@ -24,9 +26,10 @@ public class Pacman extends Character{
         }
 
         if (!maze.isWall(nextRow, nextColumn)){
-            setRow(nextRow);
-            setColumn(nextColumn);
+            return true;
         }
+
+        return false;
 
     }
 
@@ -36,5 +39,9 @@ public class Pacman extends Character{
 
     public void die(){
         alive = false;
+    }
+
+    public boolean isMoving() {
+        return moving;
     }
 }

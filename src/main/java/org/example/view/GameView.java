@@ -13,6 +13,7 @@ import org.example.model.Maze;
 public class GameView extends Pane {
 
     private Maze maze;
+    private ImageView pacmanImgView;
     private Timeline pacmanAnimation;
 
     public GameView(){
@@ -23,6 +24,8 @@ public class GameView extends Pane {
         this.setPrefSize(maze.getColumns() * GameObject.cellSize, maze.getRows() * GameObject.cellSize);
 
         drawMaze();
+
+        creatPacman();
     }
 
     private void drawMaze(){
@@ -53,7 +56,7 @@ public class GameView extends Pane {
         Image pacmanImg2 = new Image(getClass().getResourceAsStream("/Images/Pacman2.png"));
         Image pacmanImg3 = new Image(getClass().getResourceAsStream("/Images/Pacman3.png"));
 
-        ImageView pacmanImgView = new ImageView(pacmanImg1);
+        pacmanImgView = new ImageView(pacmanImg1);
         pacmanImgView.setX(14 * GameObject.cellSize);
         pacmanImgView.setY(23 * GameObject.cellSize);
 
@@ -75,11 +78,32 @@ public class GameView extends Pane {
         pacmanAnimation.pause();
     }
 
+    public void updatePacmanPosition(int row, int column){
+        pacmanImgView.setX(column * GameObject.cellSize);
+        pacmanImgView.setY(row * GameObject.cellSize);
+    }
+
     public Maze getMaze() {
         return maze;
     }
 
     public void setMaze(Maze maze) {
         this.maze = maze;
+    }
+
+    public ImageView getPacmanImgView() {
+        return pacmanImgView;
+    }
+
+    public void setPacmanImgView(ImageView pacmanImgView) {
+        this.pacmanImgView = pacmanImgView;
+    }
+
+    public Timeline getPacmanAnimation() {
+        return pacmanAnimation;
+    }
+
+    public void setPacmanAnimation(Timeline pacmanAnimation) {
+        this.pacmanAnimation = pacmanAnimation;
     }
 }

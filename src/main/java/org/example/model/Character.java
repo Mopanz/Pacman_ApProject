@@ -17,5 +17,5 @@ public abstract class Character extends GameObject{
         this.direction = direction;
     }
 
-    public abstract void move(Maze maze);
+    public abstract boolean canMove(Maze maze, Direction direction);
 }
