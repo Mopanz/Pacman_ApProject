@@ -9,16 +9,21 @@ import javafx.util.Duration;
 import org.example.model.GameObject;
 import org.example.model.LevelsGrid;
 import org.example.model.Maze;
+import org.example.model.Pellet;
+import java.util.HashMap;
 
 public class GameView extends Pane {
 
     private Maze maze;
     private ImageView pacmanImgView;
     private Timeline pacmanAnimation;
+    private HashMap<Pellet, ImageView> pelletsImg;
 
     public GameView(){
 
         maze = new Maze(LevelsGrid.getLevel1());
+
+        pelletsImg = new HashMap<>();
 
         this.setStyle("-fx-background-color: black;");
         this.setPrefSize(maze.getColumns() * GameObject.cellSize, maze.getRows() * GameObject.cellSize);
@@ -33,15 +38,18 @@ public class GameView extends Pane {
         Image pelletImg = new Image(getClass().getResourceAsStream("/Images/Pellet.png"));
         Image wallImg = new Image(getClass().getResourceAsStream("/Images/WallBlock.png"));
 
+
+        for (Pellet p : maze.getPellets()){
+            ImageView pelletImgView = new ImageView(pelletImg);
+            pelletImgView.setY(p.getRow() * GameObject.cellSize);
+            pelletImgView.setX(p.getColumn() * GameObject.cellSize);
+            pelletsImg.put(p, pelletImgView);
+            this.getChildren().add(pelletImgView);
+        }
+
         for (int i=0; i<maze.getRows(); i++){
             for (int j=0; j<maze.getColumns(); j++){
-                if (maze.getGrid()[i][j] == 0) {
-                    ImageView pelletImgView = new ImageView(pelletImg);
-                    pelletImgView.setY(i * GameObject.cellSize);
-                    pelletImgView.setX(j * GameObject.cellSize);
-                    this.getChildren().add(pelletImgView);
-                }
-                else if (maze.getGrid()[i][j] == 1) {
+                if (maze.getGrid()[i][j] == 1) {
                     ImageView wallImgView = new ImageView(wallImg);
                     wallImgView.setY(i * GameObject.cellSize);
                     wallImgView.setX(j * GameObject.cellSize);
@@ -105,5 +113,13 @@ public class GameView extends Pane {
 
     public void setPacmanAnimation(Timeline pacmanAnimation) {
         this.pacmanAnimation = pacmanAnimation;
+    }
+
+    public HashMap<Pellet, ImageView> getPelletsImg() {
+        return pelletsImg;
+    }
+
+    public void setPelletsImg(HashMap<Pellet, ImageView> pelletsImg) {
+        this.pelletsImg = pelletsImg;
     }
 }

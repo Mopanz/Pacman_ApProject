@@ -2,10 +2,7 @@ package org.example.controller;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
-import org.example.model.Direction;
-import org.example.model.GameObject;
-import org.example.model.Maze;
-import org.example.model.Pacman;
+import org.example.model.*;
 import org.example.view.GameView;
 
 public class GameController {
@@ -97,6 +94,10 @@ public class GameController {
         else {
             gameView.pausePacmanAnimation();
         }
+
+        maze.getPelletAt(pacman.getRow(), pacman.getColumn()).eat();
+        gameView.getChildren().remove(gameView.getPelletsImg().get(maze.getPelletAt(pacman.getRow(), pacman.getColumn())));
+
 
     }
 

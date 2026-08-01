@@ -23,7 +23,7 @@ public class Maze {
     private void intializePellets(){
         for (int i=0; i<rows; i++){
             for (int j=0; j<columns; j++){
-                if (grid[i][j] == 2){
+                if (grid[i][j] == 0){
                     pellets.add(new Pellet(i, j));
                 }
             }
@@ -39,7 +39,7 @@ public class Maze {
 
     public Pellet getPelletAt(int row, int column){
         for (Pellet p : pellets){
-            if (p.getRow()==row && p.getColumn()==column && !p.isEaten()){
+            if (p.getRow()==row && p.getColumn()==column){
                 return p;
             }
         }
