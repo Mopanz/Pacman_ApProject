@@ -37,4 +37,9 @@ public final class Styles {
             -fx-scale-x: 1.05;
             -fx-scale-y: 1.05;
             """;
+    public static final String ScoreStyle = """
+            -fx-font-size: 30px;
+            -fx-text-fill: #FFD700;
+            -fx-font-weight: bold;
+            """;
 }

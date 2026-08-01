@@ -14,8 +14,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(new GameController().getGameView()));
-        stage.setWidth(560);
+        stage.setScene(new Scene(new GameController().getGamePage()));
+        stage.setWidth(575);
         stage.setHeight(720);
         stage.show();
     }

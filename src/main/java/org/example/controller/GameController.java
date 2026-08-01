@@ -3,20 +3,25 @@ package org.example.controller;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import org.example.model.*;
+import org.example.view.GamePage;
 import org.example.view.GameView;
 
 public class GameController {
 
+    private GamePage gamePage;
     private GameView gameView;
     private Maze maze;
     private Pacman pacman;
     private Direction nextDirection;
+    private ScoreManager scoreManager;
 
     public GameController(){
-        gameView = new GameView();
+        gamePage = new GamePage();
+        gameView = gamePage.getGameView();
         maze = gameView.getMaze();
         pacman = new Pacman(23, 14);
         nextDirection = null;
+        scoreManager = new ScoreManager();
 
         gameView.getPacmanImgView().setFocusTraversable(true);
         gameView.getPacmanImgView().requestFocus();
@@ -34,6 +39,7 @@ public class GameController {
                 case KeyCode.RIGHT -> nextDirection = Direction.RIGHT;
                 case KeyCode.LEFT -> nextDirection = Direction.LEFT;
             }
+            scoreManager.addMovePenalty();
         });
     }
 
@@ -95,9 +101,13 @@ public class GameController {
             gameView.pausePacmanAnimation();
         }
 
-        maze.getPelletAt(pacman.getRow(), pacman.getColumn()).eat();
-        gameView.getChildren().remove(gameView.getPelletsImg().get(maze.getPelletAt(pacman.getRow(), pacman.getColumn())));
+        if (maze.getPelletAt(pacman.getRow(), pacman.getColumn()) != null && !maze.getPelletAt(pacman.getRow(), pacman.getColumn()).isEaten()){
+            maze.getPelletAt(pacman.getRow(), pacman.getColumn()).eat();
+            gameView.getChildren().remove(gameView.getPelletsImg().get(maze.getPelletAt(pacman.getRow(), pacman.getColumn())));
+            scoreManager.addPelletScore();
+        }
 
+        gamePage.updateScore(scoreManager);
 
     }
 
@@ -123,5 +133,21 @@ public class GameController {
 
     public void setPacman(Pacman pacman) {
         this.pacman = pacman;
+    }
+
+    public GamePage getGamePage() {
+        return gamePage;
+    }
+
+    public void setGamePage(GamePage gamePage) {
+        this.gamePage = gamePage;
+    }
+
+    public Direction getNextDirection() {
+        return nextDirection;
+    }
+
+    public void setNextDirection(Direction nextDirection) {
+        this.nextDirection = nextDirection;
     }
 }

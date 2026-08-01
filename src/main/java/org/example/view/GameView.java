@@ -25,7 +25,6 @@ public class GameView extends Pane {
 
         pelletsImg = new HashMap<>();
 
-        this.setStyle("-fx-background-color: black;");
         this.setPrefSize(maze.getColumns() * GameObject.cellSize, maze.getRows() * GameObject.cellSize);
 
         drawMaze();
