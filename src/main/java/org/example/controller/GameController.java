@@ -31,7 +31,6 @@ public class GameController {
 
     public void setMoveDirection(){
         gameView.setOnKeyPressed(e -> {
-            System.out.println(e.getCode());
             switch (e.getCode()){
                 case KeyCode.UP -> nextDirection = Direction.UP;
                 case KeyCode.DOWN -> nextDirection = Direction.DOWN;
@@ -71,13 +70,34 @@ public class GameController {
                 case RIGHT -> pacman.setColumn(pacman.getColumn() + 1);
                 case LEFT -> pacman.setColumn(pacman.getColumn() - 1);
             }
-            updateView();
+            pacman.setMoving(true);
+            updatePacmanImgDirection(pacman.getDirection());
+        }
+        else {
+            pacman.setMoving(false);
+        }
+        updateView();
+    }
+
+    private void updatePacmanImgDirection(Direction direction){
+        switch (direction){
+            case UP -> gameView.getPacmanImgView().setRotate(270);
+            case DOWN -> gameView.getPacmanImgView().setRotate(90);
+            case RIGHT -> gameView.getPacmanImgView().setRotate(0);
+            case LEFT -> gameView.getPacmanImgView().setRotate(180);
         }
     }
 
     private void updateView(){
-        gameView.getPacmanImgView().setX(pacman.getColumn() * GameObject.cellSize);
-        gameView.getPacmanImgView().setY(pacman.getRow() * GameObject.cellSize);
+        if (pacman.isMoving()){
+            gameView.playPacmanAnimation();
+            gameView.getPacmanImgView().setX(pacman.getColumn() * GameObject.cellSize);
+            gameView.getPacmanImgView().setY(pacman.getRow() * GameObject.cellSize);
+        }
+        else {
+            gameView.pausePacmanAnimation();
+        }
+
     }
 
     public GameView getGameView() {

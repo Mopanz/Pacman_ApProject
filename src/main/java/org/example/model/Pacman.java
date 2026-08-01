@@ -44,4 +44,8 @@ public class Pacman extends Character{
     public boolean isMoving() {
         return moving;
     }
+
+    public void setMoving(boolean moving){
+        this.moving = moving;
+    }
 }

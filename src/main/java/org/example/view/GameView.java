@@ -62,8 +62,8 @@ public class GameView extends Pane {
 
         KeyFrame frame1 = new KeyFrame(Duration.millis(150), e -> pacmanImgView.setImage(pacmanImg1));
         KeyFrame frame2 = new KeyFrame(Duration.millis(300), e -> pacmanImgView.setImage(pacmanImg2));
-        KeyFrame frame3 = new KeyFrame(Duration.millis(450), e -> pacmanImgView.setImage(pacmanImg1));
-        KeyFrame frame4 = new KeyFrame(Duration.millis(600), e -> pacmanImgView.setImage(pacmanImg3));
+        KeyFrame frame3 = new KeyFrame(Duration.millis(450), e -> pacmanImgView.setImage(pacmanImg3));
+        KeyFrame frame4 = new KeyFrame(Duration.millis(600), e -> pacmanImgView.setImage(pacmanImg2));
         pacmanAnimation = new Timeline(frame1, frame2, frame3, frame4);
         pacmanAnimation.setCycleCount(Timeline.INDEFINITE);
 
