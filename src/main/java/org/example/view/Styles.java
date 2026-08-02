@@ -38,8 +38,10 @@ public final class Styles {
             -fx-scale-y: 1.05;
             """;
     public static final String ScoreStyle = """
-            -fx-font-size: 30px;
+            -fx-font-family: "Arial Black", "Impact", sans-serif;
+            -fx-font-size: 20px;
             -fx-text-fill: #FFD700;
             -fx-font-weight: bold;
+            -fx-padding: 10 0 10 0;
             """;
 }

@@ -16,7 +16,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(new GameController().getGamePage()));
         stage.setWidth(575);
-        stage.setHeight(720);
+        stage.setHeight(710);
+        stage.setResizable(false);
         stage.show();
     }
 }

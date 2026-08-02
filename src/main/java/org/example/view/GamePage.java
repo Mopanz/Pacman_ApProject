@@ -15,12 +15,12 @@ public class GamePage extends VBox {
 
         scoreLabel = new Label("SCORE : 0");
         scoreLabel.setStyle(Styles.ScoreStyle);
+
         gameView = new GameView();
 
         this.getChildren().addAll(scoreLabel, gameView);
         this.setStyle("-fx-background-color: black;");
         this.setAlignment(Pos.TOP_CENTER);
-        this.setSpacing(15);
 
     }
 
