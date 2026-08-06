@@ -11,13 +11,14 @@ public class Ghost extends Character{
         this.state = GhostState.CHASE;
         this.color = color;
         switch (color){
-            case RED -> this.ai = new BFSAI();
-            case BLUE -> this.ai = new DFSAI();
-            case ORANGE -> this.ai = new AStarAI();
+            //case RED -> this.ai = new BFSAI();
+            case BLUE -> this.ai = new BFSAI();
+            //case ORANGE -> this.ai = new AStarAI();
         }
     }
 
     public void update(Maze maze, Pacman pacman){
+
         Direction nextDirection = ai.getNextMove(maze, this, pacman);
 
         if (canMove(maze, nextDirection)){

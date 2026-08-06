@@ -17,6 +17,7 @@ public class GameView extends Pane {
     private Maze maze;
     private ImageView pacmanImgView;
     private Timeline pacmanAnimation;
+    private ImageView ghostImgView;
     private HashMap<Pellet, ImageView> pelletsImg;
 
     public GameView(){
@@ -30,6 +31,8 @@ public class GameView extends Pane {
         drawMaze();
 
         creatPacman();
+
+        creatGhost();
     }
 
     private void drawMaze(){
@@ -77,6 +80,13 @@ public class GameView extends Pane {
         this.getChildren().add(pacmanImgView);
     }
 
+    public void creatGhost(){
+        ghostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/Ghost.png")));
+        ghostImgView.setX(14 * GameObject.cellSize);
+        ghostImgView.setY(15 * GameObject.cellSize);
+        this.getChildren().add(ghostImgView);
+    }
+
     public void playPacmanAnimation(){
         pacmanAnimation.play();
     }
@@ -120,5 +130,13 @@ public class GameView extends Pane {
 
     public void setPelletsImg(HashMap<Pellet, ImageView> pelletsImg) {
         this.pelletsImg = pelletsImg;
+    }
+
+    public ImageView getGhostImgView() {
+        return ghostImgView;
+    }
+
+    public void setGhostImgView(ImageView ghostImgView) {
+        this.ghostImgView = ghostImgView;
     }
 }

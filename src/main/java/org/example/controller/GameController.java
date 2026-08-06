@@ -12,6 +12,7 @@ public class GameController {
     private GameView gameView;
     private Maze maze;
     private Pacman pacman;
+    private Ghost ghost;
     private Direction nextDirection;
     private ScoreManager scoreManager;
 
@@ -20,6 +21,7 @@ public class GameController {
         gameView = gamePage.getGameView();
         maze = gameView.getMaze();
         pacman = new Pacman(23, 14);
+        ghost = new Ghost(15, 14, GhostColor.BLUE);
         nextDirection = null;
         scoreManager = new ScoreManager();
 
@@ -51,6 +53,7 @@ public class GameController {
                 if (now - last > 150_000_000L){
 
                     movePacman();
+                    moveGhost();
 
                     last = now;
 
@@ -91,6 +94,18 @@ public class GameController {
         }
     }
 
+    private void moveGhost(){
+        ghost.update(maze, pacman);
+
+        switch (ghost.getDirection()){
+            case UP -> ghost.setRow(ghost.getRow() - 1);
+            case DOWN -> ghost.setRow(ghost.getRow() + 1);
+            case RIGHT -> ghost.setColumn(ghost.getColumn() + 1);
+            case LEFT -> ghost.setColumn(ghost.getColumn() - 1);
+        }
+
+    }
+
     private void updateView(){
         if (pacman.isMoving()){
             gameView.playPacmanAnimation();
@@ -100,6 +115,10 @@ public class GameController {
         else {
             gameView.pausePacmanAnimation();
         }
+
+        gameView.getGhostImgView().setX(ghost.getColumn() * GameObject.cellSize);
+        gameView.getGhostImgView().setY(ghost.getRow() * GameObject.cellSize);
+        //System.out.println(ghost.getRow() + "," + ghost.getColumn());
 
         if (maze.getPelletAt(pacman.getRow(), pacman.getColumn()) != null && !maze.getPelletAt(pacman.getRow(), pacman.getColumn()).isEaten()){
             maze.getPelletAt(pacman.getRow(), pacman.getColumn()).eat();
