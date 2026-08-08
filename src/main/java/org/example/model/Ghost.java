@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.util.AudioManager;
+
 public class Ghost extends Character{
 
     private GhostColor color;

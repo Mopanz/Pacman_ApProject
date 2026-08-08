@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.example.util.AudioManager;
 
 import static org.example.view.Styles.*;
 
@@ -20,6 +21,8 @@ public class MainPage extends VBox {
     private Button exitBtn;
 
     public MainPage(){
+
+        AudioManager.getInstance().playMainMusic();
 
         logo = new ImageView(new Image(getClass().getResourceAsStream("/Images/MainPageLogo.png")));
         logo.setFitWidth(500);
@@ -36,7 +39,7 @@ public class MainPage extends VBox {
 
         this.setSpacing(20);
         this.setAlignment(Pos.CENTER);
-        this.setStyle("-fx-background-color: black;");
+        this.setStyle("-fx-background-color: #1d5397;");
         this.setPadding(new Insets(40, 50, 50, 50));
         this.getChildren().addAll(logo, new Region(), playBtn, scoresBtn, settingsBtn,exitBtn);
         this.setMaxWidth(400);

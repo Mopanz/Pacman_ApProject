@@ -3,6 +3,7 @@ package org.example.controller;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import org.example.model.*;
+import org.example.util.AudioManager;
 import org.example.view.GamePage;
 import org.example.view.GameView;
 
@@ -95,6 +96,7 @@ public class GameController {
     }
 
     private void moveGhost(){
+        AudioManager.getInstance().playGhostSound();
         ghost.update(maze, pacman);
 
         switch (ghost.getDirection()){
@@ -118,9 +120,9 @@ public class GameController {
 
         gameView.getGhostImgView().setX(ghost.getColumn() * GameObject.cellSize);
         gameView.getGhostImgView().setY(ghost.getRow() * GameObject.cellSize);
-        //System.out.println(ghost.getRow() + "," + ghost.getColumn());
 
         if (maze.getPelletAt(pacman.getRow(), pacman.getColumn()) != null && !maze.getPelletAt(pacman.getRow(), pacman.getColumn()).isEaten()){
+            AudioManager.getInstance().playPelletSound();
             maze.getPelletAt(pacman.getRow(), pacman.getColumn()).eat();
             gameView.getChildren().remove(gameView.getPelletsImg().get(maze.getPelletAt(pacman.getRow(), pacman.getColumn())));
             scoreManager.addPelletScore();
