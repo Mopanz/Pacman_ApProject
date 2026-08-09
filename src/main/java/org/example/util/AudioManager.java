@@ -18,8 +18,13 @@ public class AudioManager {
     private AudioClip pelletSound;
     private AudioClip gameOverSound;
 
+    private boolean musicOn;
+    private boolean soundOn;
+
     private AudioManager(){
         loadResources();
+        musicOn = true;
+        soundOn = true;
     }
 
     public static AudioManager getInstance(){
@@ -65,7 +70,7 @@ public class AudioManager {
     }
 
     public void playGhostSound(){
-        if (ghostSound != null && !ghostSound.isPlaying()){
+        if (ghostSound != null && soundOn && !ghostSound.isPlaying()){
             ghostSound.play();
         }
     }
@@ -75,7 +80,7 @@ public class AudioManager {
     }
 
     public void playPelletSound(){
-        if (pelletSound != null ){
+        if (pelletSound != null && soundOn){
             pelletSound.play();
         }
     }
@@ -84,5 +89,29 @@ public class AudioManager {
         if (gameOverSound != null){
             gameOverSound.play();
         }
+    }
+
+    public boolean isMusicOn() {
+        return musicOn;
+    }
+
+    public void onMusic(){
+        musicOn = true;
+    }
+
+    public void offMusic(){
+        musicOn = false;
+    }
+
+    public boolean isSoundOn() {
+        return soundOn;
+    }
+
+    public void onSound(){
+        soundOn = true;
+    }
+
+    public void offSound(){
+        soundOn = false;
     }
 }

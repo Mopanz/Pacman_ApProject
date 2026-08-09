@@ -1,20 +1,35 @@
 package org.example.controller;
 
 import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.example.view.MainPage;
+import org.example.view.SettingsPage;
 
 import static org.example.view.Styles.*;
 
 public class MainPageController {
+
+    private Stage parentStage;
     private MainPage mainPage;
 
-    public MainPageController(){
+    private Stage settingsStage;
+    private SettingsPageController settingsPageController;
 
+
+    public MainPageController(Stage stage){
+
+        this.parentStage = stage;
         mainPage = new MainPage();
 
         activeBtns();
 
         deactiveBtns();
+
+        settingsBtn();
 
         exitBtn();
     }
@@ -26,38 +41,44 @@ public class MainPageController {
     public void activeBtns(){
 
         mainPage.getPlayBtn().setOnMouseEntered(e -> {
-            mainPage.getPlayBtn().setStyle(activeStyle);
+            mainPage.getPlayBtn().setStyle(BtnActiveStyle);
         });
 
         mainPage.getScoresBtn().setOnMouseEntered(e -> {
-            mainPage.getScoresBtn().setStyle(activeStyle);
+            mainPage.getScoresBtn().setStyle(BtnActiveStyle);
         });
 
         mainPage.getSettingsBtn().setOnMouseEntered(e -> {
-            mainPage.getSettingsBtn().setStyle(activeStyle);
+            mainPage.getSettingsBtn().setStyle(BtnActiveStyle);
         });
 
         mainPage.getExitBtn().setOnMouseEntered(e -> {
-            mainPage.getExitBtn().setStyle(activeStyle);
+            mainPage.getExitBtn().setStyle(BtnActiveStyle);
         });
     }
 
     public void deactiveBtns(){
 
         mainPage.getPlayBtn().setOnMouseExited(e -> {
-            mainPage.getPlayBtn().setStyle(normalStyle);
+            mainPage.getPlayBtn().setStyle(BtnNormalStyle);
         });
 
         mainPage.getScoresBtn().setOnMouseExited(e -> {
-            mainPage.getScoresBtn().setStyle(normalStyle);
+            mainPage.getScoresBtn().setStyle(BtnNormalStyle);
         });
 
         mainPage.getSettingsBtn().setOnMouseExited(e -> {
-            mainPage.getSettingsBtn().setStyle(normalStyle);
+            mainPage.getSettingsBtn().setStyle(BtnNormalStyle);
         });
 
         mainPage.getExitBtn().setOnMouseExited(e -> {
-            mainPage.getExitBtn().setStyle(normalStyle);
+            mainPage.getExitBtn().setStyle(BtnNormalStyle);
+        });
+    }
+
+    public void settingsBtn(){
+        mainPage.getSettingsBtn().setOnAction(e -> {
+            openSttingsWindow();
         });
     }
 
@@ -65,6 +86,26 @@ public class MainPageController {
         mainPage.getExitBtn().setOnAction(e-> {
             Platform.exit();
         });
+    }
+
+    public void openSttingsWindow(){
+
+        if (settingsStage == null){
+            settingsStage = new Stage();
+            settingsStage.initModality(Modality.APPLICATION_MODAL);
+            settingsStage.initOwner(parentStage);
+            settingsStage.initStyle(StageStyle.TRANSPARENT);
+            settingsStage.setResizable(false);
+
+            settingsPageController = new SettingsPageController(settingsStage);
+
+            Scene scene = new Scene(settingsPageController.getSettingsPage());
+            scene.setFill(Color.TRANSPARENT);
+            settingsStage.setScene(scene);
+
+        }
+
+        settingsStage.showAndWait();
     }
 
     public void setMainPage(MainPage mainPage) {

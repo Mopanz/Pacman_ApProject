@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.example.util.AudioManager;
 
@@ -29,13 +28,13 @@ public class MainPage extends VBox {
         logo.setPreserveRatio(true);
 
         playBtn = new Button("Play");
-        playBtn.setStyle(normalStyle);
+        playBtn.setStyle(BtnNormalStyle);
         scoresBtn = new Button("Scores");
-        scoresBtn.setStyle(normalStyle);
+        scoresBtn.setStyle(BtnNormalStyle);
         settingsBtn = new Button("Settings");
-        settingsBtn.setStyle(normalStyle);
+        settingsBtn.setStyle(BtnNormalStyle);
         exitBtn = new Button("Exit");
-        exitBtn.setStyle(normalStyle);
+        exitBtn.setStyle(BtnNormalStyle);
 
         this.setSpacing(20);
         this.setAlignment(Pos.CENTER);
