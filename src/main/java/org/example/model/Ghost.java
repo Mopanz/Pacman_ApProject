@@ -14,7 +14,7 @@ public class Ghost extends Character{
         this.color = color;
         switch (color){
             //case RED -> this.ai = new BFSAI();
-            case BLUE -> this.ai = new ChaserAI();
+            case BLUE -> this.ai = new BFSAI();
             //case ORANGE -> this.ai = new AStarAI();
         }
     }

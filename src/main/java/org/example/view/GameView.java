@@ -22,7 +22,7 @@ public class GameView extends Pane {
 
     public GameView(){
 
-        maze = new Maze(LevelsGrid.getLevel1());
+        maze = new Maze(LevelsGrid.getLevel2());
 
         pelletsImg = new HashMap<>();
 
