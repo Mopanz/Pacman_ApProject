@@ -68,23 +68,43 @@ public final class Styles {
             -fx-faint-focus-color: transparent;
             -fx-focus-traversable: false;
             """;
-    public static  final String SoundOnImg = """
+    public static final String SoundOnImg = """
             -fx-background-image: url("/Images/SoundOn.png");
             -fx-background-repeat: no-repeat;
             -fx-background-position: center;
             """;
-    public static  final String SoundOffImg = """
+    public static final String SoundOffImg = """
             -fx-background-image: url("/Images/SoundOff.png");
             -fx-background-repeat: no-repeat;
             -fx-background-position: center;
             """;
-    public static  final String MusicOnImg = """
+    public static final String MusicOnImg = """
             -fx-background-image: url("/Images/MusicOn.png");
             -fx-background-repeat: no-repeat;
             -fx-background-position: center;
             """;
-    public static  final String MusicOffImg = """
+    public static final String MusicOffImg = """
             -fx-background-image: url("/Images/MusicOff.png");
+            -fx-background-repeat: no-repeat;
+            -fx-background-position: center;
+            """;
+    public static final String TwoGhostsImg = """
+            -fx-background-image: url("/Images/TwoGhosts.png");
+            -fx-background-repeat: no-repeat;
+            -fx-background-position: center;
+            """;
+    public static final String ThreeGhostsImg = """
+            -fx-background-image: url("/Images/ThreeGhosts.png");
+            -fx-background-repeat: no-repeat;
+            -fx-background-position: center;
+            """;
+    public static final String ClassicMapImg = """
+            -fx-background-image: url("/Images/ClassicMap.png");
+            -fx-background-repeat: no-repeat;
+            -fx-background-position: center;
+            """;
+    public static final String HardMapImg = """
+            -fx-background-image: url("/Images/HardMap.png");
             -fx-background-repeat: no-repeat;
             -fx-background-position: center;
             """;

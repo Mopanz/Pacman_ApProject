@@ -69,6 +69,10 @@ public class AudioManager {
         mainMusic.pause();
     }
 
+    public void stopMainMusic(){
+        mainMusic.stop();
+    }
+
     public void playGhostSound(){
         if (ghostSound != null && soundOn && !ghostSound.isPlaying()){
             ghostSound.play();

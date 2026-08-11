@@ -7,7 +7,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.view.MainPage;
-import org.example.view.SettingsPage;
 
 import static org.example.view.Styles.*;
 
@@ -15,6 +14,10 @@ public class MainPageController {
 
     private Stage parentStage;
     private MainPage mainPage;
+
+    private Stage playStage;
+    private PlayPageController playPageController;
+
 
     private Stage settingsStage;
     private SettingsPageController settingsPageController;
@@ -28,6 +31,8 @@ public class MainPageController {
         activeBtns();
 
         deactiveBtns();
+
+        playBtn();
 
         settingsBtn();
 
@@ -74,6 +79,32 @@ public class MainPageController {
         mainPage.getExitBtn().setOnMouseExited(e -> {
             mainPage.getExitBtn().setStyle(BtnNormalStyle);
         });
+    }
+
+    public void playBtn(){
+        mainPage.getPlayBtn().setOnAction( e -> {
+            openPlayWindow();
+        });
+    }
+
+    public void openPlayWindow(){
+
+        if (playStage == null){
+            playStage = new Stage();
+            playStage.initModality(Modality.APPLICATION_MODAL);
+            playStage.initOwner(parentStage);
+            playStage.initStyle(StageStyle.TRANSPARENT);
+            playStage.setResizable(false);
+
+            playPageController = new PlayPageController(playStage, parentStage);
+
+            Scene scene = new Scene(playPageController.getPlayPage());
+            scene.setFill(Color.TRANSPARENT);
+            playStage.setScene(scene);
+        }
+
+        playStage.showAndWait();
+
     }
 
     public void settingsBtn(){

@@ -1,0 +1,8 @@
+.radio-button .radio {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.radio-button .radio .dot {
+    -fx-padding: 0;
+}
