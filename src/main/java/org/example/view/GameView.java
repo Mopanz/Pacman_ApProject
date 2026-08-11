@@ -10,6 +10,8 @@ import org.example.model.GameObject;
 import org.example.model.LevelsGrid;
 import org.example.model.Maze;
 import org.example.model.Pellet;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameView extends Pane {
@@ -17,12 +19,14 @@ public class GameView extends Pane {
     private Maze maze;
     private ImageView pacmanImgView;
     private Timeline pacmanAnimation;
-    private ImageView ghostImgView;
+    private ArrayList<ImageView> ghostsImgView;
     private HashMap<Pellet, ImageView> pelletsImg;
 
-    public GameView(){
+    public GameView(int[][] levelGrid, boolean thirdGhost){
 
-        maze = new Maze(LevelsGrid.getLevel2());
+        maze = new Maze(levelGrid);
+
+        ghostsImgView = new ArrayList<>();
 
         pelletsImg = new HashMap<>();
 
@@ -32,7 +36,7 @@ public class GameView extends Pane {
 
         creatPacman();
 
-        creatGhost();
+        creatGhost(thirdGhost);
     }
 
     private void drawMaze(){
@@ -80,11 +84,30 @@ public class GameView extends Pane {
         this.getChildren().add(pacmanImgView);
     }
 
-    public void creatGhost(){
-        ghostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/Ghost.png")));
+    public void creatGhost(boolean thirdGhost){
+        ImageView blueGhostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/BlueGhost.png")));
+        blueGhostImgView.setX(14 * GameObject.cellSize);
+        blueGhostImgView.setY(15 * GameObject.cellSize);
+        ghostsImgView.add(blueGhostImgView);
+
+        ImageView orangeGhostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/OrangeGhost.png")));
+        orangeGhostImgView.setX(13 * GameObject.cellSize);
+        orangeGhostImgView.setY(15 * GameObject.cellSize);
+        ghostsImgView.add(orangeGhostImgView);
+
+        this.getChildren().addAll(blueGhostImgView, orangeGhostImgView);
+
+        if (thirdGhost){
+            ImageView redGhostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/RedGhost.png")));
+            redGhostImgView.setX(14 * GameObject.cellSize);
+            redGhostImgView.setY(14 * GameObject.cellSize);
+            ghostsImgView.add(redGhostImgView);
+            this.getChildren().add(redGhostImgView);
+        }
+        /*ghostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/Ghost.png")));
         ghostImgView.setX(14 * GameObject.cellSize);
         ghostImgView.setY(15 * GameObject.cellSize);
-        this.getChildren().add(ghostImgView);
+        this.getChildren().add(ghostImgView);*/
     }
 
     public void playPacmanAnimation(){
@@ -132,11 +155,11 @@ public class GameView extends Pane {
         this.pelletsImg = pelletsImg;
     }
 
-    public ImageView getGhostImgView() {
-        return ghostImgView;
+    public ArrayList<ImageView> getGhostsImgView() {
+        return ghostsImgView;
     }
 
-    public void setGhostImgView(ImageView ghostImgView) {
-        this.ghostImgView = ghostImgView;
+    public void setGhostsImgView(ArrayList<ImageView> ghostsImgView) {
+        this.ghostsImgView = ghostsImgView;
     }
 }

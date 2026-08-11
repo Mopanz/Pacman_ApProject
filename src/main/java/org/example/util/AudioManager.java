@@ -60,7 +60,7 @@ public class AudioManager {
     }
 
     public void playMainMusic(){
-        if (mainMusic != null){
+        if (mainMusic != null && musicOn){
             mainMusic.play();
         }
     }
@@ -90,7 +90,7 @@ public class AudioManager {
     }
 
     public void playGameOverSound(){
-        if (gameOverSound != null){
+        if (gameOverSound != null && soundOn){
             gameOverSound.play();
         }
     }

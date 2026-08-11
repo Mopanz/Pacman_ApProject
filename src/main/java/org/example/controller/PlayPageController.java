@@ -2,6 +2,7 @@ package org.example.controller;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.model.LevelsGrid;
 import org.example.util.AudioManager;
 import org.example.view.PlayPage;
 import org.example.view.Styles;
@@ -114,7 +115,14 @@ public class PlayPageController {
         playPage.getStartBtn().setOnAction( e -> {
             playStage.close();
             AudioManager.getInstance().stopMainMusic();
-            GameController gameController = new GameController();
+
+            GameController gameController;
+            if (playPage.getClassicMap().isSelected()){
+                gameController = new GameController(parentStage, LevelsGrid.getLevel1(), playPage.getThreeGhost().isSelected());
+            }
+            else {
+                gameController = new GameController(parentStage, LevelsGrid.getLevel2(), playPage.getThreeGhost().isSelected());
+            }
             parentStage.setScene(new Scene(gameController.getGamePage()));
         });
     }

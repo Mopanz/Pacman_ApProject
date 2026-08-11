@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.example.model.LevelsGrid;
 import org.example.model.ScoreManager;
 
 public class GamePage extends VBox {
@@ -11,12 +12,12 @@ public class GamePage extends VBox {
     private Label scoreLabel;
     private GameView gameView;
 
-    public GamePage(){
+    public GamePage(int[][] levelGrid, boolean thirdGhost){
 
         scoreLabel = new Label("SCORE : 0");
         scoreLabel.setStyle(Styles.ScoreStyle);
 
-        gameView = new GameView();
+        gameView = new GameView(levelGrid, thirdGhost);
 
         this.getChildren().addAll(scoreLabel, gameView);
         this.setStyle("-fx-background-color: black;");

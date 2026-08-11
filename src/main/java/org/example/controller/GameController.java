@@ -1,28 +1,47 @@
 package org.example.controller;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.example.model.*;
 import org.example.util.AudioManager;
 import org.example.view.GamePage;
 import org.example.view.GameView;
 
+import java.util.ArrayList;
+
 public class GameController {
 
+    private Stage parentStage;
     private GamePage gamePage;
     private GameView gameView;
+    private AnimationTimer timer;
     private Maze maze;
     private Pacman pacman;
-    private Ghost ghost;
+    private ArrayList<Ghost> ghosts;
     private Direction nextDirection;
     private ScoreManager scoreManager;
 
-    public GameController(){
-        gamePage = new GamePage();
+    public GameController(Stage parentStage, int[][] levelGrid, boolean thirdGhost){
+        this.parentStage = parentStage;
+        gamePage = new GamePage(levelGrid, thirdGhost);
         gameView = gamePage.getGameView();
         maze = gameView.getMaze();
         pacman = new Pacman(23, 14);
-        ghost = new Ghost(15, 14, GhostColor.BLUE);
+
+        ghosts = new ArrayList<>();
+        ghosts.add(new Ghost(15, 14, GhostColor.BLUE));
+        ghosts.add(new Ghost(15, 13, GhostColor.ORANGE));
+        if (thirdGhost){
+            ghosts.add(new Ghost(14, 14, GhostColor.RED));
+        }
+
         nextDirection = null;
         scoreManager = new ScoreManager();
 
@@ -47,7 +66,7 @@ public class GameController {
     }
 
     private void gameLoop(){
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             long last = 0;
             @Override
             public void handle(long now) {
@@ -55,6 +74,9 @@ public class GameController {
 
                     movePacman();
                     moveGhost();
+
+                    win();
+                    gameOver();
 
                     last = now;
 
@@ -70,6 +92,9 @@ public class GameController {
         }
 
         if (pacman.canMove(maze, pacman.getDirection())){
+
+            pacman.setPreviousRow(pacman.getRow());
+            pacman.setPreviousColumn(pacman.getColumn());
 
             switch (pacman.getDirection()){
                 case UP -> pacman.setRow(pacman.getRow() - 1);
@@ -97,15 +122,21 @@ public class GameController {
 
     private void moveGhost(){
         AudioManager.getInstance().playGhostSound();
-        ghost.update(maze, pacman);
 
-        switch (ghost.getDirection()){
-            case UP -> ghost.setRow(ghost.getRow() - 1);
-            case DOWN -> ghost.setRow(ghost.getRow() + 1);
-            case RIGHT -> ghost.setColumn(ghost.getColumn() + 1);
-            case LEFT -> ghost.setColumn(ghost.getColumn() - 1);
+        for (Ghost ghost : ghosts){
+
+            ghost.setPreviousRow(ghost.getRow());
+            ghost.setPreviousColumn(ghost.getColumn());
+
+            ghost.update(maze, pacman);
+
+            switch (ghost.getDirection()) {
+                case UP -> ghost.setRow(ghost.getRow() - 1);
+                case DOWN -> ghost.setRow(ghost.getRow() + 1);
+                case RIGHT -> ghost.setColumn(ghost.getColumn() + 1);
+                case LEFT -> ghost.setColumn(ghost.getColumn() - 1);
+            }
         }
-
     }
 
     private void updateView(){
@@ -118,8 +149,10 @@ public class GameController {
             gameView.pausePacmanAnimation();
         }
 
-        gameView.getGhostImgView().setX(ghost.getColumn() * GameObject.cellSize);
-        gameView.getGhostImgView().setY(ghost.getRow() * GameObject.cellSize);
+        for (int i=0; i<ghosts.size();i++){
+            gameView.getGhostsImgView().get(i).setX(ghosts.get(i).getColumn() * GameObject.cellSize);
+            gameView.getGhostsImgView().get(i).setY(ghosts.get(i).getRow() * GameObject.cellSize);
+        }
 
         if (maze.getPelletAt(pacman.getRow(), pacman.getColumn()) != null && !maze.getPelletAt(pacman.getRow(), pacman.getColumn()).isEaten()){
             AudioManager.getInstance().playPelletSound();
@@ -130,6 +163,45 @@ public class GameController {
 
         gamePage.updateScore(scoreManager);
 
+    }
+
+    private void win(){
+        if (maze.areAllPelletsEaten()){
+            timer.stop();
+            AudioManager.getInstance().pauseGhostSound();
+            gameView.pausePacmanAnimation();
+            System.out.println("Win\nScore:" + scoreManager.getScore());
+        }
+    }
+
+    private void gameOver(){
+        for (Ghost ghost : ghosts){
+            boolean conditionOne = ghost.getRow() == pacman.getRow() && ghost.getColumn() == pacman.getColumn();
+            boolean conditionTwo = ghost.getRow() == pacman.getPreviousRow() && ghost.getColumn() == pacman.getPreviousColumn() && ghost.getPreviousRow() == pacman.getRow() && ghost.getPreviousColumn() == pacman.getColumn();
+            if (conditionOne || conditionTwo){
+                timer.stop();
+                AudioManager.getInstance().pauseGhostSound();
+                gameView.pausePacmanAnimation();
+                Platform.runLater(() -> oppenGameOverWindow());
+                break;
+            }
+        }
+    }
+
+    private void oppenGameOverWindow(){
+        Stage gameOverStage = new Stage();
+        gameOverStage.initModality(Modality.APPLICATION_MODAL);
+        gameOverStage.initOwner(parentStage);
+        gameOverStage.initStyle(StageStyle.TRANSPARENT);
+        gameOverStage.setResizable(false);
+
+        GameOverPageController gameOverPageController= new GameOverPageController(gameOverStage, parentStage, scoreManager.getScore(), maze.getGrid(), ghosts.size() == 3);
+
+        Scene scene = new Scene(gameOverPageController.getGameOverPage());
+        scene.setFill(Color.TRANSPARENT);
+        gameOverStage.setScene(scene);
+
+        gameOverStage.showAndWait();
     }
 
     public GameView getGameView() {

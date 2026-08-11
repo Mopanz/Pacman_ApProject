@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.example.util.AudioManager;
 
 public class SettingsPage extends VBox {
 
@@ -23,10 +24,19 @@ public class SettingsPage extends VBox {
         top.setAlignment(Pos.CENTER_RIGHT);
 
         soundBtn = new Button();
-        soundBtn.setStyle(Styles.BtnNormalStyle + Styles.SoundOnImg);
+        if (AudioManager.getInstance().isSoundOn()){
+            soundBtn.setStyle(Styles.BtnNormalStyle + Styles.SoundOnImg);
+        }
+        else {
+            soundBtn.setStyle(Styles.BtnNormalStyle + Styles.SoundOffImg);
+        }
         musicBtn = new Button();
-        musicBtn.setStyle(Styles.BtnNormalStyle);
-        musicBtn.setStyle(Styles.BtnNormalStyle + Styles.MusicOnImg);
+        if (AudioManager.getInstance().isMusicOn()){
+            musicBtn.setStyle(Styles.BtnNormalStyle + Styles.MusicOnImg);
+        }
+        else {
+            musicBtn.setStyle(Styles.BtnNormalStyle + Styles.MusicOffImg);
+        }
         VBox settingsColumn = new VBox(soundBtn, musicBtn);
         settingsColumn.setSpacing(20);
         settingsColumn.setAlignment(Pos.CENTER);

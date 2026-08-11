@@ -8,11 +8,19 @@ public class ScoreManager {
         score = score + 10;
     }
 
+    public void addAllPelletsEatenScore(){
+        score = score + 500;
+    }
+
     public void addMovePenalty(){
         score = score - 1;
     }
 
     public int getScore() {
         return score;
+    }
+
+    public void resetScore(){
+        score = 0;
     }
 }
