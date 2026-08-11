@@ -17,6 +17,7 @@ public class AudioManager {
     private AudioClip ghostSound;
     private AudioClip pelletSound;
     private AudioClip gameOverSound;
+    private AudioClip victorySound;
 
     private boolean musicOn;
     private boolean soundOn;
@@ -56,6 +57,8 @@ public class AudioManager {
         gameOverSound = new AudioClip(getClass().getResource("/Sounds/GameOverSound.mp3").toString());
         gameOverSound.setVolume(0.5);
 
+        victorySound = new AudioClip(getClass().getResource("/Sounds/VictorySound.mp3").toString());
+        victorySound.setVolume(0.5);
 
     }
 
@@ -95,6 +98,11 @@ public class AudioManager {
         }
     }
 
+    public void playVictorySound(){
+        if (victorySound != null && soundOn){
+            victorySound.play();
+        }
+    }
     public boolean isMusicOn() {
         return musicOn;
     }

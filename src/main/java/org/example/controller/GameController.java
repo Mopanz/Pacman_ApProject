@@ -170,7 +170,7 @@ public class GameController {
             timer.stop();
             AudioManager.getInstance().pauseGhostSound();
             gameView.pausePacmanAnimation();
-            System.out.println("Win\nScore:" + scoreManager.getScore());
+            Platform.runLater(() -> oppenVictoryWindow());
         }
     }
 
@@ -186,6 +186,23 @@ public class GameController {
                 break;
             }
         }
+    }
+
+    private void oppenVictoryWindow(){
+        Stage victoryStage = new Stage();
+        victoryStage.initModality(Modality.APPLICATION_MODAL);
+        victoryStage.initOwner(parentStage);
+        victoryStage.initStyle(StageStyle.TRANSPARENT);
+        victoryStage.setResizable(false);
+
+        VictoryPageController victoryPageController = new VictoryPageController(victoryStage, parentStage, scoreManager.getScore(), maze.getGrid(), ghosts.size() == 3);
+
+
+        Scene scene = new Scene(victoryPageController.getVictoryPage());
+        scene.setFill(Color.TRANSPARENT);
+        victoryStage.setScene(scene);
+
+        victoryStage.showAndWait();
     }
 
     private void oppenGameOverWindow(){
