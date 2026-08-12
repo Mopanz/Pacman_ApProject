@@ -22,6 +22,7 @@ public class MainPageController {
     private Stage settingsStage;
     private SettingsPageController settingsPageController;
 
+    private Stage scoreStage;
 
     public MainPageController(Stage stage){
 
@@ -33,6 +34,8 @@ public class MainPageController {
         deactiveBtns();
 
         playBtn();
+
+        scoresBtn();
 
         settingsBtn();
 
@@ -105,6 +108,32 @@ public class MainPageController {
 
         playStage.showAndWait();
 
+    }
+
+    public void scoresBtn(){
+        mainPage.getScoresBtn().setOnAction( e -> {
+            openScoresWindow();
+        });
+    }
+
+    public void openScoresWindow(){
+
+        if (scoreStage == null){
+            scoreStage = new Stage();
+            scoreStage.initModality(Modality.APPLICATION_MODAL);
+            scoreStage.initOwner(parentStage);
+            scoreStage.initStyle(StageStyle.TRANSPARENT);
+            scoreStage.setResizable(false);
+            scoreStage.setWidth(525);
+        }
+
+        TopScorePageController topScorePageController = new TopScorePageController(scoreStage);
+
+        Scene scene = new Scene(topScorePageController.getTopScoresPage());
+        scene.setFill(Color.TRANSPARENT);
+        scoreStage.setScene(scene);
+
+        scoreStage.showAndWait();
     }
 
     public void settingsBtn(){

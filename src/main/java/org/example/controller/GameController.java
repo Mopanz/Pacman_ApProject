@@ -9,12 +9,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.example.database.DatabaseManager;
 import org.example.model.*;
 import org.example.util.AudioManager;
 import org.example.view.GamePage;
 import org.example.view.GameView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameController {
 
@@ -170,6 +172,8 @@ public class GameController {
             timer.stop();
             AudioManager.getInstance().pauseGhostSound();
             gameView.pausePacmanAnimation();
+            scoreManager.addAllPelletsEatenScore();
+            saveDatabase();
             Platform.runLater(() -> oppenVictoryWindow());
         }
     }
@@ -182,6 +186,7 @@ public class GameController {
                 timer.stop();
                 AudioManager.getInstance().pauseGhostSound();
                 gameView.pausePacmanAnimation();
+                saveDatabase();
                 Platform.runLater(() -> oppenGameOverWindow());
                 break;
             }
@@ -219,6 +224,21 @@ public class GameController {
         gameOverStage.setScene(scene);
 
         gameOverStage.showAndWait();
+    }
+
+    private void saveDatabase(){
+        if (ghosts.size() == 2 && Arrays.deepEquals(maze.getGrid(), LevelsGrid.getLevel1())){
+            DatabaseManager.saveScore(2, "Classic", scoreManager.getScore());
+        }
+        else if (ghosts.size() == 2 && Arrays.deepEquals(maze.getGrid(), LevelsGrid.getLevel2())) {
+            DatabaseManager.saveScore(2, "Hard", scoreManager.getScore());
+        }
+        else if (ghosts.size() == 3 && Arrays.deepEquals(maze.getGrid(), LevelsGrid.getLevel1())){
+            DatabaseManager.saveScore(3, "Classic", scoreManager.getScore());
+        }
+        else{
+            DatabaseManager.saveScore(3, "Hard", scoreManager.getScore());
+        }
     }
 
     public GameView getGameView() {
