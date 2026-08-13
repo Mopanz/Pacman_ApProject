@@ -2,9 +2,7 @@ package org.example.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.example.model.LevelsGrid;
 import org.example.model.ScoreManager;
 
 public class GamePage extends VBox {

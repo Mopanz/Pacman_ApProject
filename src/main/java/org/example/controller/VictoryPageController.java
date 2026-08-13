@@ -23,7 +23,7 @@ public class VictoryPageController {
 
     }
 
-    public void activeBtns(){
+    private void activeBtns(){
 
         victoryPage.getPlayAgainBtn().setOnMouseEntered(e -> {
             victoryPage.getPlayAgainBtn().setStyle(Styles.BtnActiveStyle);
@@ -35,7 +35,7 @@ public class VictoryPageController {
 
     }
 
-    public void deactiveBtns(){
+    private void deactiveBtns(){
 
         victoryPage.getPlayAgainBtn().setOnMouseExited( e -> {
             victoryPage.getPlayAgainBtn().setStyle(Styles.BtnNormalStyle);
@@ -47,7 +47,7 @@ public class VictoryPageController {
 
     }
 
-    public void playAgainBtn(Stage victoryStage, Stage parentStage, int[][] levelsGrid, boolean thirdGhost){
+    private void playAgainBtn(Stage victoryStage, Stage parentStage, int[][] levelsGrid, boolean thirdGhost){
         victoryPage.getPlayAgainBtn().setOnAction( e -> {
             victoryStage.close();
             GameController gameController = new GameController(parentStage, levelsGrid, thirdGhost);
@@ -55,7 +55,7 @@ public class VictoryPageController {
         });
     }
 
-    public void backToMenuBtn(Stage victoryStage, Stage parentStage){
+    private void backToMenuBtn(Stage victoryStage, Stage parentStage){
         victoryPage.getBackToMenuBtn().setOnAction( e -> {
             victoryStage.close();
             parentStage.setScene(new Scene(new MainPageController(parentStage).getMainPage()));

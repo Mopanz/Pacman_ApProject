@@ -12,6 +12,25 @@ public abstract class Character extends GameObject{
         this.direction = direction;
     }
 
+    public boolean canMove(Maze maze, Direction direction){
+        int nextRow = getRow();
+        int nextColumn = getColumn();
+
+        switch (direction){
+            case UP -> nextRow--;
+            case DOWN -> nextRow++;
+            case RIGHT -> nextColumn++;
+            case LEFT -> nextColumn--;
+        }
+
+        if (!maze.isWall(nextRow, nextColumn)){
+            return true;
+        }
+
+        return false;
+
+    }
+
     public Direction getDirection() {
         return direction;
     }
@@ -36,22 +55,4 @@ public abstract class Character extends GameObject{
         this.previousColumn = previousColumn;
     }
 
-    public boolean canMove(Maze maze, Direction direction){
-        int nextRow = getRow();
-        int nextColumn = getColumn();
-
-        switch (direction){
-            case UP -> nextRow--;
-            case DOWN -> nextRow++;
-            case RIGHT -> nextColumn++;
-            case LEFT -> nextColumn--;
-        }
-
-        if (!maze.isWall(nextRow, nextColumn)){
-            return true;
-        }
-
-        return false;
-
-    }
 }

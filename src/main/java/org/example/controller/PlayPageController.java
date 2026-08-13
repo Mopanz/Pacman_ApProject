@@ -29,7 +29,7 @@ public class PlayPageController {
 
     }
 
-    public void activeBtns(){
+    private void activeBtns(){
 
         playPage.getCloseBtn().setOnMouseEntered( e -> {
             playPage.getCloseBtn().setStyle(Styles.CloseActiveStyle);
@@ -41,7 +41,7 @@ public class PlayPageController {
 
     }
 
-    public void deactiveBtns(){
+    private void deactiveBtns(){
 
         playPage.getCloseBtn().setOnMouseExited( e -> {
             playPage.getCloseBtn().setStyle(Styles.CloseNormalStyle);
@@ -53,13 +53,13 @@ public class PlayPageController {
 
     }
 
-    public void closeBtn(Stage playStage){
+    private void closeBtn(Stage playStage){
         playPage.getCloseBtn().setOnAction( e -> {
             playStage.close();
         });
     }
 
-    public void ghostRadioButtons(){
+    private void ghostRadioButtons(){
 
         playPage.getTwoGhost().selectedProperty().addListener(
                 (obs, oldValue, newValue) -> {
@@ -85,7 +85,7 @@ public class PlayPageController {
 
     }
 
-    public void mapRadioButtons(){
+    private void mapRadioButtons(){
 
         playPage.getClassicMap().selectedProperty().addListener(
                 (obs, oldValue, newValue) -> {
@@ -111,7 +111,7 @@ public class PlayPageController {
 
     }
 
-    public void startBtn(Stage playStage, Stage parentStage){
+    private void startBtn(Stage playStage, Stage parentStage){
         playPage.getStartBtn().setOnAction( e -> {
             playStage.close();
             AudioManager.getInstance().stopMainMusic();

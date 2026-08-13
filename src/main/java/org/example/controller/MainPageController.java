@@ -18,7 +18,6 @@ public class MainPageController {
     private Stage playStage;
     private PlayPageController playPageController;
 
-
     private Stage settingsStage;
     private SettingsPageController settingsPageController;
 
@@ -42,11 +41,7 @@ public class MainPageController {
         exitBtn();
     }
 
-    public MainPage getMainPage() {
-        return mainPage;
-    }
-
-    public void activeBtns(){
+    private void activeBtns(){
 
         mainPage.getPlayBtn().setOnMouseEntered(e -> {
             mainPage.getPlayBtn().setStyle(BtnActiveStyle);
@@ -65,7 +60,7 @@ public class MainPageController {
         });
     }
 
-    public void deactiveBtns(){
+    private void deactiveBtns(){
 
         mainPage.getPlayBtn().setOnMouseExited(e -> {
             mainPage.getPlayBtn().setStyle(BtnNormalStyle);
@@ -84,13 +79,13 @@ public class MainPageController {
         });
     }
 
-    public void playBtn(){
+    private void playBtn(){
         mainPage.getPlayBtn().setOnAction( e -> {
             openPlayWindow();
         });
     }
 
-    public void openPlayWindow(){
+    private void openPlayWindow(){
 
         if (playStage == null){
             playStage = new Stage();
@@ -110,13 +105,13 @@ public class MainPageController {
 
     }
 
-    public void scoresBtn(){
+    private void scoresBtn(){
         mainPage.getScoresBtn().setOnAction( e -> {
             openScoresWindow();
         });
     }
 
-    public void openScoresWindow(){
+    private void openScoresWindow(){
 
         if (scoreStage == null){
             scoreStage = new Stage();
@@ -136,19 +131,19 @@ public class MainPageController {
         scoreStage.showAndWait();
     }
 
-    public void settingsBtn(){
+    private void settingsBtn(){
         mainPage.getSettingsBtn().setOnAction(e -> {
             openSttingsWindow();
         });
     }
 
-    public void exitBtn(){
+    private void exitBtn(){
         mainPage.getExitBtn().setOnAction(e-> {
             Platform.exit();
         });
     }
 
-    public void openSttingsWindow(){
+    private void openSttingsWindow(){
 
         if (settingsStage == null){
             settingsStage = new Stage();
@@ -166,6 +161,10 @@ public class MainPageController {
         }
 
         settingsStage.showAndWait();
+    }
+
+    public MainPage getMainPage() {
+        return mainPage;
     }
 
     public void setMainPage(MainPage mainPage) {

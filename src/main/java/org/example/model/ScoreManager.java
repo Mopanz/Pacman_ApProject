@@ -20,7 +20,4 @@ public class ScoreManager {
         return score;
     }
 
-    public void resetScore(){
-        score = 0;
-    }
 }

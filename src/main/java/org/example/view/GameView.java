@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.example.model.GameObject;
-import org.example.model.LevelsGrid;
 import org.example.model.Maze;
 import org.example.model.Pellet;
 
@@ -65,7 +64,7 @@ public class GameView extends Pane {
         }
     }
 
-    public void creatPacman(){
+    private void creatPacman(){
         Image pacmanImg1 = new Image(getClass().getResourceAsStream("/Images/Pacman1.png"));
         Image pacmanImg2 = new Image(getClass().getResourceAsStream("/Images/Pacman2.png"));
         Image pacmanImg3 = new Image(getClass().getResourceAsStream("/Images/Pacman3.png"));
@@ -84,7 +83,7 @@ public class GameView extends Pane {
         this.getChildren().add(pacmanImgView);
     }
 
-    public void creatGhost(boolean thirdGhost){
+    private void creatGhost(boolean thirdGhost){
         ImageView blueGhostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/BlueGhost.png")));
         blueGhostImgView.setX(14 * GameObject.cellSize);
         blueGhostImgView.setY(15 * GameObject.cellSize);
@@ -104,10 +103,7 @@ public class GameView extends Pane {
             ghostsImgView.add(redGhostImgView);
             this.getChildren().add(redGhostImgView);
         }
-        /*ghostImgView = new ImageView(new Image(getClass().getResourceAsStream("/Images/Ghost.png")));
-        ghostImgView.setX(14 * GameObject.cellSize);
-        ghostImgView.setY(15 * GameObject.cellSize);
-        this.getChildren().add(ghostImgView);*/
+
     }
 
     public void playPacmanAnimation(){
@@ -116,11 +112,6 @@ public class GameView extends Pane {
 
     public void pausePacmanAnimation(){
         pacmanAnimation.pause();
-    }
-
-    public void updatePacmanPosition(int row, int column){
-        pacmanImgView.setX(column * GameObject.cellSize);
-        pacmanImgView.setY(row * GameObject.cellSize);
     }
 
     public Maze getMaze() {

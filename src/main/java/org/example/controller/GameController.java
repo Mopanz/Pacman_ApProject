@@ -3,7 +3,6 @@ package org.example.controller;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -14,7 +13,6 @@ import org.example.model.*;
 import org.example.util.AudioManager;
 import org.example.view.GamePage;
 import org.example.view.GameView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -55,7 +53,7 @@ public class GameController {
         gameLoop();
     }
 
-    public void setMoveDirection(){
+    private void setMoveDirection(){
         gameView.setOnKeyPressed(e -> {
             switch (e.getCode()){
                 case KeyCode.UP -> nextDirection = Direction.UP;
@@ -241,28 +239,12 @@ public class GameController {
         }
     }
 
-    public GameView getGameView() {
-        return gameView;
+    public Stage getParentStage() {
+        return parentStage;
     }
 
-    public void setGameView(GameView gameView) {
-        this.gameView = gameView;
-    }
-
-    public Maze getMaze() {
-        return maze;
-    }
-
-    public void setMaze(Maze maze) {
-        this.maze = maze;
-    }
-
-    public Pacman getPacman() {
-        return pacman;
-    }
-
-    public void setPacman(Pacman pacman) {
-        this.pacman = pacman;
+    public void setParentStage(Stage parentStage) {
+        this.parentStage = parentStage;
     }
 
     public GamePage getGamePage() {
@@ -273,11 +255,20 @@ public class GameController {
         this.gamePage = gamePage;
     }
 
-    public Direction getNextDirection() {
-        return nextDirection;
+    public GameView getGameView() {
+        return gameView;
     }
 
-    public void setNextDirection(Direction nextDirection) {
-        this.nextDirection = nextDirection;
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
     }
+
+    public AnimationTimer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(AnimationTimer timer) {
+        this.timer = timer;
+    }
+
 }

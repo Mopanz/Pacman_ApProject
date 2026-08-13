@@ -2,7 +2,6 @@ package org.example.controller;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.example.model.LevelsGrid;
 import org.example.view.GameOverPage;
 import org.example.view.Styles;
 
@@ -24,7 +23,7 @@ public class GameOverPageController {
 
     }
 
-    public void activeBtns(){
+    private void activeBtns(){
 
         gameOverPage.getPlayAgainBtn().setOnMouseEntered(e -> {
             gameOverPage.getPlayAgainBtn().setStyle(Styles.BtnActiveStyle);
@@ -36,7 +35,7 @@ public class GameOverPageController {
 
     }
 
-    public void deactiveBtns(){
+    private void deactiveBtns(){
 
         gameOverPage.getPlayAgainBtn().setOnMouseExited( e -> {
             gameOverPage.getPlayAgainBtn().setStyle(Styles.BtnNormalStyle);
@@ -48,7 +47,7 @@ public class GameOverPageController {
 
     }
 
-    public void playAgainBtn(Stage gameOverStage, Stage parentStage, int[][] levelsGrid, boolean thirdGhost){
+    private void playAgainBtn(Stage gameOverStage, Stage parentStage, int[][] levelsGrid, boolean thirdGhost){
         gameOverPage.getPlayAgainBtn().setOnAction( e -> {
             gameOverStage.close();
             GameController gameController = new GameController(parentStage, levelsGrid, thirdGhost);
@@ -56,7 +55,7 @@ public class GameOverPageController {
         });
     }
 
-    public void backToMenuBtn(Stage gameOverStage, Stage parentStage){
+    private void backToMenuBtn(Stage gameOverStage, Stage parentStage){
         gameOverPage.getBackToMenuBtn().setOnAction( e -> {
             gameOverStage.close();
             parentStage.setScene(new Scene(new MainPageController(parentStage).getMainPage()));

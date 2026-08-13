@@ -28,12 +28,4 @@ public abstract class GameObject {
         this.column = column;
     }
 
-    public int getPixelX(){
-        return row * cellSize;
-    }
-
-    public int getPixelY(){
-        return column * cellSize;
-    }
-
 }

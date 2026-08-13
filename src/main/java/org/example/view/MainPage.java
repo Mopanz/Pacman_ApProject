@@ -13,7 +13,6 @@ import static org.example.view.Styles.*;
 
 public class MainPage extends VBox {
 
-    private ImageView logo;
     private Button playBtn;
     private Button scoresBtn;
     private Button settingsBtn;
@@ -23,7 +22,7 @@ public class MainPage extends VBox {
 
         AudioManager.getInstance().playMainMusic();
 
-        logo = new ImageView(new Image(getClass().getResourceAsStream("/Images/MainPageLogo.png")));
+        ImageView logo = new ImageView(new Image(getClass().getResourceAsStream("/Images/MainPageLogo.png")));
         logo.setFitWidth(500);
         logo.setPreserveRatio(true);
 
@@ -43,14 +42,6 @@ public class MainPage extends VBox {
         this.getChildren().addAll(logo, new Region(), playBtn, scoresBtn, settingsBtn,exitBtn);
         this.setMaxWidth(400);
 
-    }
-
-    public ImageView getLogo() {
-        return logo;
-    }
-
-    public void setLogo(ImageView logo) {
-        this.logo = logo;
     }
 
     public Button getPlayBtn() {

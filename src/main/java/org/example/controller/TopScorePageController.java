@@ -32,7 +32,7 @@ public class TopScorePageController {
         getThreeGhostHardMapScores();
     }
 
-    public void activeBtns(){
+    private void activeBtns(){
 
         topScoresPage.getCloseBtn().setOnMouseEntered( e -> {
             topScoresPage.getCloseBtn().setStyle(Styles.CloseActiveStyle);
@@ -40,7 +40,7 @@ public class TopScorePageController {
 
     }
 
-    public void deactiveBtns(){
+    private void deactiveBtns(){
 
         topScoresPage.getCloseBtn().setOnMouseExited( e -> {
             topScoresPage.getCloseBtn().setStyle(Styles.CloseNormalStyle);
@@ -48,7 +48,7 @@ public class TopScorePageController {
 
     }
 
-    public void closeBtn(Stage scoreStage){
+    private void closeBtn(Stage scoreStage){
 
         topScoresPage.getCloseBtn().setOnAction( e -> {
             scoreStage.close();

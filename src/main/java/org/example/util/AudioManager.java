@@ -3,9 +3,6 @@ package org.example.util;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-
-import javax.print.DocFlavor;
 
 
 public class AudioManager {

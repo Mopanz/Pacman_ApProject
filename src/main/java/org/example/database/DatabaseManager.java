@@ -11,7 +11,7 @@ public class DatabaseManager {
     private DatabaseManager(){
     }
 
-    public static void makeConnection(){
+    private static void makeConnection(){
 
         try {
 
@@ -34,7 +34,7 @@ public class DatabaseManager {
         }
     }
 
-    public static void closeConnection(){
+    private static void closeConnection(){
         if (connection != null){
             try {
                 statement.close();
