@@ -16,7 +16,7 @@ public class Ghost extends Character{
     }
 
     public void update(Maze maze, Pacman pacman){
-        this.setDirection(ai.getNextMove(maze, this, pacman));
+        this.setDirection(ai.getNextDirection(maze, this, pacman));
     }
 
     public GhostColor getColor() {

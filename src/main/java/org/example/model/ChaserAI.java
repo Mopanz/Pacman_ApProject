@@ -9,7 +9,7 @@ public class ChaserAI implements GhostAI{
     private int count = 0;
 
     @Override
-    public Direction getNextMove(Maze maze, Ghost ghost, Pacman pacman) {
+    public Direction getNextDirection(Maze maze, Ghost ghost, Pacman pacman) {
 
         Direction[] exiteDirection = {Direction.UP, Direction.UP, Direction.UP, Direction.UP, Direction.LEFT};
         if (count < exiteDirection.length){

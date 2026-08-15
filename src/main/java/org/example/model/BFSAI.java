@@ -20,7 +20,7 @@ public class BFSAI implements GhostAI{
     }
 
     @Override
-    public Direction getNextMove(Maze maze, Ghost ghost, Pacman pacman) {
+    public Direction getNextDirection(Maze maze, Ghost ghost, Pacman pacman) {
 
         Queue<Node> queue = new ArrayDeque<>();
         boolean[][] visited = new boolean[maze.getRows()][maze.getColumns()];
